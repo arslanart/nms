@@ -1,6 +1,7 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <img src="{{ asset('asset/frontend/images/egatlogo.png') }}" alt="Logo" class="w-32 h-32 mx-auto mb-4">
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
