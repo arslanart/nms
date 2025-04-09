@@ -1,3 +1,5 @@
 <div>
-    {{-- The Master doesn't talk, he acts. --}}
+    <div class="content-wrapper">
+        <h1 style="text-align: center">In Progress...</h1>
+    </div>
 </div>

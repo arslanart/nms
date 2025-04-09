@@ -1,3 +1,69 @@
-<div>
-    {{-- The whole world belongs to you. --}}
+<!-- filepath: d:\laragon\www\NMS\resources\views\livewire\admin-menu.blade.php -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Management</h1>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-success" wire:click="createUser">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-striped table-bordered">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th scope="col" class="text-center">No.</th>
+                            <th scope="col" class="text-center">Username</th>
+                            <th scope="col" class="text-center">Level</th>
+                            <th scope="col" class="text-center">Email</th>
+                            <th scope="col" class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!empty($data) && $data->isNotEmpty())
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td class="text-center">{{ ucfirst($item->user_type) }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('profile-view', ['id' => $item->id]) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-folder"></i> View
+                                        </a>
+                                        <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <button class="btn btn-danger btn-sm"
+                                            wire:click.prevent="delete({{ $item->id }})">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5" class="text-center">No data available</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                {{ $data->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
+    </section>
 </div>

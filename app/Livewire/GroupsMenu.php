@@ -4,10 +4,19 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Group; // นำเข้าโมเดล Group
+use Livewire\Withpagination;
+
 
 class GroupsMenu extends Component
 {
-    public $group_name, $port, $multicast_address; // ฟิลด์สำหรับชื่อกลุ่ม
+    public $group,$group_name, $port, $multicast_address; // ฟิลด์สำหรับชื่อกลุ่ม
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
+    public function mount()
+    {
+        $this->group = Group::all();
+    }
 
     public function saveGroup()
     {
@@ -39,6 +48,7 @@ class GroupsMenu extends Component
 
     public function render()
     {
-        return view('livewire.groups-menu');
+        $data = Group::paginate(10);
+        return view('livewire.groups-menu')->with(compact('data'));
     }
 }

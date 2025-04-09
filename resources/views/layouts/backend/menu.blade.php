@@ -30,6 +30,13 @@
                         <span>Group</span></a>
                 </li>
 
+                @can('admin-menu')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin-view') }}">
+                        <i class="fas fa-fw fa-male"></i>
+                        <span>Administrator</span></a>
+                </li>
+                @endcan
                 {{-- <!-- Nav Item - Dashboard -->
                 {{-- <li class="nav-item active">
                     <a class="nav-link" href="{{ route('admin-dashboard') }}">
