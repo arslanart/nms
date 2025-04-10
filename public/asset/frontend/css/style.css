@@ -389,7 +389,7 @@ blockquote.pull-left {
   background: #00d154;
 }
 .btn-primary {
-    background: #00d154;
+    background: rgb(25, 86, 255);
     padding: 10px 20px;
     border: none;
     color: white;
@@ -400,7 +400,7 @@ blockquote.pull-left {
     left: 50%; /* กึ่งกลางในแนวนอน */
     transform: translateX(-50%); /* ปรับให้อยู่กลางในแนวนอน */
     margin: 0 auto;
-    width: 30%; /* กำหนดความกว้างของปุ่ม */
+    width: 79%; /* กำหนดความกว้างของปุ่ม */
   }
 
 .btn-dark {
