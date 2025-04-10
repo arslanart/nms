@@ -86,8 +86,7 @@
                         </div>
                     </li>
                 @endcan --}}
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+
 
                 <!-- Nav Item - Charts -->
                 {{-- <li class="nav-item">
