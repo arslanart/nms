@@ -1,48 +1,120 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <img src="{{ asset('asset/frontend/images/egatlogo.png') }}" alt="Logo" class="w-32 h-32 mx-auto mb-4">
+<!DOCTYPE html>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>INMS.LoginPage</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+    <!-- THEME CSS
+ ================================================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="asset/frontend/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="asset/frontend/plugins/font-awesome/css/font-awesome.min.css">
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="asset/frontend/plugins/slick-carousel/slick.css">
+    <link rel="stylesheet" href="asset/frontend/plugins/slick-carousel/slick-theme.css">
+    <!-- manin stylesheet -->
+    <link rel="stylesheet" href="asset/frontend/css/style.css">
+</head>
+
+<body>
+
+
+    <section class="login-signup section-padding">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-7">
+                    <div class="login">
+                        <img src="{{ asset('asset/frontend/images/egatlogo.png') }}" alt="" class="img-fluid mx-auto d-block">
+
+
+
+                        <h3 class="mt-4">Welcome</h3>
+                        <p class="mb-5">Internal IP Party Line Network Management System</p>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <li>{{ session('error') }}</li>
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('login') }}" class="login-form row">
+                            @csrf
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="loginusername">Email</label>
+                                    <input type="text" id="email" class="form-control" name="email"
+                                        placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="loginPassword">Password</label>
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Enter your password" required>
+                                </div>
+                            </div>
+
+                            <div class="block mt-4 mb-4">
+                                <label for="remember_me" class="flex items-center">
+                                    <x-checkbox id="remember_me" name="remember" />
+                                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-12.5">
+                                <button class="btn btn-primary mb-4" type="submit">Login</button>
+
+                            </div>
+
+
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+    <!-- THEME JAVASCRIPT FILES
+================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="asset/frontend/plugins/jquery/jquery.js"></script>
+    <!-- Bootstrap jQuery -->
+    <script src="asset/frontend/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="asset/frontend/plugins/slick-carousel/slick.min.js"></script>
+    <!-- main js -->
+    <script src="asset/frontend/js/custom.js"></script>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+</body>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>
