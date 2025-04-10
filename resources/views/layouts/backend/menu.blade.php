@@ -30,6 +30,12 @@
                         <span>Group</span></a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('inventory') }}">
+                        <i class="fas fa-fw fa-box text-dark"></i>
+                        <span>Inventory</span></a>
+                </li>
+
                 @can('admin-menu')
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('admin-view') }}">
