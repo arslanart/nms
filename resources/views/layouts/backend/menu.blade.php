@@ -1,11 +1,11 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4 table-responsive">
+<aside class="main-sidebar sidebar-white-primary elevation-4 table-responsive">
     <nav class="mt-2 table-responsive">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion table-responsive" id="accordionSidebar">
+            <ul class="navbar-nav bg-white sidebar sidebar-white accordion table-responsive" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center">
@@ -19,21 +19,21 @@
                 <hr class="sidebar-divider my-3"> <!-- ปรับระยะห่างของเส้นแบ่ง -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">
-                        <i class="fas fa-fw fa-home"></i>
+                    <a class="nav-link text-dark" href="{{ route('dashboard') }}">
+                        <i class="fas fa-fw fa-home text-dark"></i>
                         <span>Home</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('group') }}">
-                        <i class="fas fa-fw fa-table"></i>
+                    <a class="nav-link text-dark" href="{{ route('group') }}">
+                        <i class="fas fa-fw fa-table text-dark"></i>
                         <span>Group</span></a>
                 </li>
 
                 @can('admin-menu')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin-view') }}">
-                        <i class="fas fa-fw fa-male"></i>
+                    <a class="nav-link text-dark" href="{{ route('admin-view') }}">
+                        <i class="fas fa-fw fa-male text-dark"></i>
                         <span>Administrator</span></a>
                 </li>
                 @endcan
