@@ -1,3 +1,5 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
+    <div class="content-wrapper">
+        <h1 style="text-align: center">In Progress...</h1>
+    </div>
 </div>
