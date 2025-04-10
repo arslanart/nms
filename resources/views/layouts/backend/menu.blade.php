@@ -36,6 +36,12 @@
                         <span>Inventory</span></a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('alarm') }}">
+                        <i class="fas fa-fw fa-bell text-dark"></i>
+                        <span>Alarm</span></a>
+                </li>
+
                 @can('admin-menu')
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('admin-view') }}">

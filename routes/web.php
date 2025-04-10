@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
         return view('inventory');
     })->name('inventory');
 
+    Route::get('alarm',function(){
+        return view('alarm');
+    })->name('alarm');
+
+
     Route::get('admin-view',function(){
         return view('admin-view');
     })->name('admin-view');
