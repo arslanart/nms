@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>User Management</h1>
+                    <h1>Administrator</h1>
                 </div>
                 <div class="col-sm-6 text-right">
                     <button class="btn btn-success" wire:click="createUser">
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="card-body p-0">
                 <table class="table table-striped table-bordered">
-                    <thead class="bg-secondary text-white">
+                    <thead class="bg-dark-secondary text-dark">
                         <tr>
                             <th scope="col" class="text-center">No.</th>
                             <th scope="col" class="text-center">Username</th>
@@ -40,7 +40,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('profile-view', ['id' => $item->id]) }}"
                                             class="btn btn-primary btn-sm">
-                                            <i class="fas fa-folder"></i> View
+                                            <i class="fas fa-eye"></i> View
                                         </a>
                                         <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                             class="btn btn-warning btn-sm">
