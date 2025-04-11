@@ -22,11 +22,11 @@
                 <table class="table table-striped table-bordered">
                     <thead class="bg-dark-secondary text-dark">
                         <tr>
-                            <th scope="col" class="text-center">No.</th>
+                            <th style="width: 10%"scope="col" class="text-center">No.</th>
                             <th scope="col" class="text-center">Username</th>
                             <th scope="col" class="text-center">Level</th>
                             <th scope="col" class="text-center">Email</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th style="width: 20%" scope="col" class="text-center">Select</th>
                         </tr>
                     </thead>
                     <tbody>
