@@ -139,6 +139,29 @@ body {
     max-width: 100%; /* ป้องกันไม่ให้เกินความกว้างของหน้าจอ */
     overflow-x: hidden; /* ซ่อน scrollbar ด้านข้างหากมีเนื้อหาล้น */
 }
+
+.hover-effect:hover {
+    background-color: #e9ecef; /* สีเทาอ่อน Bootstrap */
+    color: #0056b3 !important;
+}
+
+.hover-effect:hover i {
+    color: #0056b3 !important;
+}
+
+.nav-item:hover {
+    background-color: #f8f9fa; /* สีพื้นหลังเมื่อ hover */
+    border-radius: 5px; /* มุมโค้ง */
+}
+
+.nav-item:hover .nav-link {
+    color: #007bff !important; /* เปลี่ยนสีข้อความเมื่อ hover */
+}
+
+.nav-item .nav-link {
+    transition: color 0.3s ease, background-color 0.3s ease; /* เพิ่มเอฟเฟกต์การเปลี่ยนแปลง */
+}
+
 .content {
     flex-grow: 1;
 }

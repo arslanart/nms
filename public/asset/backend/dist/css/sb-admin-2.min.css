@@ -12608,3 +12608,26 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
     width: 100%
 }
+
+.nav-link.active {
+    background-color: #e9ecef !important; /* สีพื้นหลัง */
+    color: #007bff !important;            /* สีข้อความ */
+    font-weight: 600;
+    border-left: 4px solid #007bff;       /* เส้นข้างซ้าย */
+    padding-left: 1rem;                   /* ดันข้อความออกจากเส้น */
+}
+
+.nav-link.active i {
+    color: #007bff !important;
+}
+
+.nav-link:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+
+.sidebar .nav-link:hover {
+    border-left: 4px solid #007bff;
+    padding-left: 1rem;
+}

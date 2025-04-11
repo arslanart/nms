@@ -19,34 +19,40 @@
                 <hr class="sidebar-divider my-3"> <!-- ปรับระยะห่างของเส้นแบ่ง -->
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('dashboard') }}">
+                    <a class="nav-link text-dark {{ request()->routeIs('dashboard') ? 'active' : '' }} hover-effect" href="{{ route('dashboard') }}">
                         <i class="fas fa-fw fa-home text-dark"></i>
-                        <span>Home</span></a>
+                        <span>Home</span>
+                    </a>
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('view-group') }}">
+                    <a class="nav-link text-dark {{ request()->routeIs('view-group') ? 'active' : '' }} hover-effect" href="{{ route('view-group') }}">
                         <i class="fas fa-fw fa-table text-dark"></i>
-                        <span>Group</span></a>
+                        <span>Group</span>
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('inventory') }}">
+                    <a class="nav-link text-dark {{ request()->routeIs('inventory') ? 'active' : '' }} hover-effect" href="{{ route('inventory') }}">
                         <i class="fas fa-fw fa-box text-dark"></i>
-                        <span>Inventory</span></a>
+                        <span>Inventory</span>
+                    </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('alarm') }}">
+                    <a class="nav-link text-dark {{ request()->routeIs('alarm') ? 'active' : '' }} hover-effect" href="{{ route('alarm') }}">
                         <i class="fas fa-fw fa-bell text-dark"></i>
-                        <span>Alarm</span></a>
+                        <span>Alarm</span>
+                    </a>
                 </li>
 
                 @can('admin-menu')
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('admin-view') }}">
+                    <a class="nav-link text-dark {{ request()->routeIs('admin-view') ? 'active' : '' }} hover-effect" href="{{ route('admin-view') }}">
                         <i class="fas fa-fw fa-male text-dark"></i>
-                        <span>Administrator</span></a>
+                        <span>Administrator</span>
+                    </a>
                 </li>
                 @endcan
                 {{-- <!-- Nav Item - Dashboard -->
