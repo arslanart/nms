@@ -25,7 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ route('group') }}">
+                    <a class="nav-link text-dark" href="{{ route('view-group') }}">
                         <i class="fas fa-fw fa-table text-dark"></i>
                         <span>Group</span></a>
                 </li>

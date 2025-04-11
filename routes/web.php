@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('user-dashboard',[UserController::class,'user'])->name('user-dashboard');
+
     Route::get('group',function(){
         return view('group');
     })->name('group');
@@ -25,6 +26,14 @@ Route::middleware('auth')->group(function () {
     Route::get('view-group',function(){
         return view('view-group');
     })->name('view-group');
+
+    Route::get('group-view/{id}',function ($id){
+        return view('group-view',compact('id'));
+    })->name('group-view');
+
+    Route::get('group-edit/{id}',function ($id){
+        return view('group-edit',compact('id'));
+    })->name('group-edit');
 
     Route::get('inventory',function(){
         return view('inventory');
