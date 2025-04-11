@@ -10,10 +10,10 @@
                         <th style="width: 2%">
                             Group Name
                         </th>
-                        <th style="width: 8%" >
+                        <th style="width: 8%">
                             Multicast Address
                         </th>
-                        <th style="width: 8%" >
+                        <th style="width: 8%">
                             Port
                         </th>
                     </tr>
@@ -38,7 +38,9 @@
                             {{-- <td class="project-state">
                                 <span class="badge badge-success">Success</span>
                             </td> --}}
-                            {{-- <td class="project-actions text-right">
+
+                            {{-- Action --}}
+                            <td class="project-actions text-right">
                                 <a class="btn btn-primary btn-sm" href="{{ route('group-view', ['id' => $item->id]) }}">
                                     <i class="fas fa-folder">
                                     </i>
@@ -55,7 +57,7 @@
                                     </i>
                                     Delete
                                 </a>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
