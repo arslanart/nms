@@ -22,11 +22,11 @@
                 <table class="table table-striped table-bordered">
                     <thead class="bg-dark-secondary text-dark">
                         <tr>
-                            <th scope="col" class="text-center">No.</th>
+                            <th style="width: 10%"scope="col" class="text-center">No.</th>
                             <th scope="col" class="text-center">Username</th>
                             <th scope="col" class="text-center">Level</th>
                             <th scope="col" class="text-center">Email</th>
-                            <th scope="col" class="text-center">Action</th>
+                            <th style="width: 12%" scope="col" class="text-center">Select</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,15 +40,15 @@
                                     <td class="text-center">
                                         <a href="{{ route('profile-view', ['id' => $item->id]) }}"
                                             class="btn btn-primary btn-sm">
-                                            <i class="fas fa-eye"></i> View
+                                            <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                             class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i> Edit
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                         <button class="btn btn-danger btn-sm"
                                             wire:click.prevent="delete({{ $item->id }})">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
