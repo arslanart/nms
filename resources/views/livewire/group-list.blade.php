@@ -34,9 +34,9 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->group_name }}</td>
+                                    <td class="text-center">{{ $item->group_name }}</td>
                                     <td class="text-center">{{$item->multicast_address }}</td>
-                                    <td>{{ $item->port}}</td>
+                                    <td class="text-center">{{ $item->port}}</td>
                                     <td class="text-center">
                                         <a href="{{ route('profile-view', ['id' => $item->id]) }}"
                                             class="btn btn-primary btn-sm">
