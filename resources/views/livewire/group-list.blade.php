@@ -1,82 +1,69 @@
-<div>
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Group</h1>
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        <button class="btn btn-success" wire:click="createUser">
-                            <i class="fas fa-plus"></i> Add Group
-                        </button>
-                    </div>
+<!-- filepath: d:\laragon\www\NMS\resources\views\livewire\admin-menu.blade.php -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Group</h1>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-success" wire:click="createGroup">
+                        <i class="fas fa-plus"></i> Add Group
+                    </button>
                 </div>
             </div>
-        </section>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th style="width: 10%">
-                            No.
-                        </th>
-                        <th style="width: 20%">
-                            Group Name
-                        </th>
-                        <th style="width: 30%">
-                            Multicast Address
-                        </th>
-                        <th style="width: 8%">
-                            Port
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $item)
-                        <tr>
-                            <td>
-                                {{ $item->id }}
-                            </td>
-                            <td>
-                                <a>
-                                    {{ $item->group_name }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ $item->multicast_address }}
-                            </td>
-                            <td class="project_progress">
-                                {{ $item->port }}
-                            </td>
-                            {{-- <td class="project-state">
-                                <span class="badge badge-success">Success</span>
-                            </td> --}}
-
-                            {{-- Action --}}
-                            <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" href="{{ route('group-view', ['id' => $item->id]) }}">
-                                    <i class="fas fa-folder">
-                                    </i>
-                                    View
-                                </a>
-                                <a class="btn btn-info btn-sm" href="{{ route('group-edit', ['id' => $item->id]) }}">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Edit
-                                </a>
-                                <a class="btn btn-danger btn-sm" wire:click="delete({{ $item->id }})"
-                                    href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Delete
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
-        {{ $data->links() }}
-    </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="card">
+            <div class="card-body p-0">
+                <table class="table table-striped table-bordered">
+                    <thead class="bg-dark-secondary text-dark">
+                        <tr>
+                            <th style="width: 10%"scope="col" class="text-center">No.</th>
+                            <th scope="col" class="text-center">Group</th>
+                            <th scope="col" class="text-center">Multicast address</th>
+                            <th scope="col" class="text-center">Port</th>
+                            <th style="width: 20%" scope="col" class="text-center">Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!empty($data) && $data->isNotEmpty())
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $item->group_name }}</td>
+                                    <td class="text-center">{{$item->multicast_address }}</td>
+                                    <td>{{ $item->port}}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('profile-view', ['id' => $item->id]) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-eye"></i> View
+                                        </a>
+                                        <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <button class="btn btn-danger btn-sm"
+                                            wire:click.prevent="delete({{ $item->id }})">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="5" class="text-center">No data available</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                {{ $data->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
+    </section>
 </div>
