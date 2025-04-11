@@ -1,16 +1,30 @@
 <div>
     <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Group</h1>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button class="btn btn-success" wire:click="createUser">
+                            <i class="fas fa-plus"></i> Add Group
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="card-body p-0">
             <table class="table table-striped projects">
                 <thead>
                     <tr>
-                        <th style="width: 1%">
+                        <th style="width: 10%">
                             No.
                         </th>
-                        <th style="width: 2%">
+                        <th style="width: 20%">
                             Group Name
                         </th>
-                        <th style="width: 8%">
+                        <th style="width: 30%">
                             Multicast Address
                         </th>
                         <th style="width: 8%">
