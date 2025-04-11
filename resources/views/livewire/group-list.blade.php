@@ -7,9 +7,9 @@
                         <h1>Group</h1>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <button class="btn btn-success" wire:click="createUser">
+                        <a class="btn btn-success" href="{{ route('group') }}">
                             <i class="fas fa-plus"></i> Add Group
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
