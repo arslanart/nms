@@ -22,7 +22,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="bg-dark-secondary text-dark">
                         <tr>
-                            <th style="width: 10%"scope="col" class="text-center">No.</th>
+                            <th style="width: 5%"scope="col" class="text-center">No.</th>
                             <th scope="col" class="text-center">Device name</th>
                             <th scope="col" class="text-center">Region</th>
                             <th scope="col" class="text-center">IP address</th>
@@ -37,9 +37,12 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $item->group_name }}</td>
-                                    <td class="text-center">{{$item->multicast_address }}</td>
-                                    <td class="text-center">{{ $item->port}}</td>
+                                    <td class="text-center">{{ $item->inventory_name }}</td>
+                                    <td class="text-center">{{$item->region }}</td>
+                                    <td class="text-center">{{$item->ip_address }}</td>
+                                    <td class="text-center">{{$item->group_name }}</td>
+                                    <td class="text-center">{{ $item->uptime }}</td>
+                                    <td class="text-center">{{$item->device_status}}</td>
                                     <td class="text-center">
                                         <a href="{{ route('profile-view', ['id' => $item->id]) }}"
                                             class="btn btn-primary btn-sm">
