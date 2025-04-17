@@ -34,10 +34,15 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td class="text-center">{{ ucfirst($item->user_type) }}</td>
-                                    <td>{{ $item->email }}</td>
-
+                                    <td>{{ $item->device_name }}</td>
+                                    <td>{{ $item->ip_address }}</td>
+                                    <td class="text-center">{{($item->alarm_type) }}</td>
+                                    <td>{{ $item->alarm_duration}}</td>
+                                    <td class="text-center">{{($item->alarm_serverity) }}</td>
+                                    <td>{{ $item->alarm_desciption }}</td>
+                                    <td>{{ $item->alarm_description }}</td>
+                                    <td>{{ $item->created_at}}</td>
+                                    <td>{{ $item->alarm_status }}</td>
                                 </tr>
                             @endforeach
                         @else
