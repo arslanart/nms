@@ -1,4 +1,3 @@
-<!-- filepath: d:\laragon\www\NMS\resources\views\livewire\admin-menu.blade.php -->
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -7,13 +6,71 @@
                     <h1>Administrator</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <button class="btn btn-success" wire:click="createUser">
-                        <i class="fas fa-plus"></i> Add User
-                    </button>
+                    @if (!$showForm)
+                        <button class="btn btn-success" wire:click="createUser">
+                            <i class="fas fa-plus"></i> Add User
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
+
+    @if (session()->has('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
+    @if ($showForm)
+        <section class="content">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Add User</h3>
+                </div>
+                <div class="card-body">
+                    <form wire:submit.prevent="saveUser">
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" id="name" wire:model="name" class="form-control">
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="user_type">User Type</label>
+                            <select id="user_type" wire:model="user_type" class="form-control custom-select">
+                                <option value="">Please Select Level</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Viewer</option>
+                            </select>
+                            @error('user_type')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" wire:model="email" class="form-control">
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" wire:model="password" class="form-control">
+                            @error('password')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-danger" wire:click="hideUserForm">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- Main content -->
     <section class="content">

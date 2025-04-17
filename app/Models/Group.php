@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class Group extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
+
+
     protected $fillable = [
         'id',
         'group_name',
