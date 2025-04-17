@@ -43,8 +43,8 @@
                             <label for="user_type">User Type</label>
                             <select id="user_type" wire:model="user_type" class="form-control custom-select">
                                 <option value="">Please Select Level</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Viewer</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Viewer">Viewer</option>
                             </select>
                             @error('user_type')
                                 <small class="text-danger">{{ $message }}</small>

@@ -10,7 +10,7 @@ class UserController extends Controller
     public function admin()
     {
         $user = Auth::user();
-        if ($user->user_type !== 'admin') {
+        if ($user->user_type !== 'Admin') {
             abort(403, 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้');
         }
         dd(Auth::user());
@@ -21,7 +21,7 @@ class UserController extends Controller
     public function user()
     {
         $user = Auth::user();
-        if ($user->user_type !== 'user') {
+        if ($user->user_type !== 'Viewer') {
             abort(403, 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้');
         }
 

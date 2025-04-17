@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
             [
                 [
                     'name' => 'admin1111',
-                    'user_type' => 'admin',
+                    'user_type' => 'Admin',
                     'email' => 'admin@aa.com',
                     'password' => bcrypt('12345678'),
                 ],
                 [
                     'name' => 'user1111',
-                    'user_type' => 'user',
+                    'user_type' => 'Viewer',
                     'email' => 'user@aa.com',
                     'password' => bcrypt('12345678'),
                 ]

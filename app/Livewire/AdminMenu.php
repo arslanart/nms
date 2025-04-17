@@ -17,7 +17,7 @@ class AdminMenu extends Component
         'name' => 'required|string|max:255',
         'user_type' => 'required|string|max:255',
         'email' => 'required|email|max:255',
-        'password' => 'required|string|min:8|confirmed',
+        'password' => 'required|string|min:8',
     ];
 
     public function createUser() // ฟังก์ชันสร้างผู้ใช้ใหม่
@@ -55,6 +55,13 @@ class AdminMenu extends Component
     {
         $this->users = User::all(); // โหลดข้อมูลผู้ใช้ทั้งหมด
     }
+
+    public function delete($id)
+    {
+        User::findOrFail($id)->delete();
+        session()->flash('message', 'User deleted.');
+    }
+
 
     public function render()
     {
