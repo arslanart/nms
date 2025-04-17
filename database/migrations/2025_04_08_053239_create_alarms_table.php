@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('alarms', function (Blueprint $table) {
             $table->id();
             $table->string('alarm_name');
+            $table->string('alarm_duration');
+            $table->string('alarm_serverity');
+            $table->string('alarm_description');
             $table->string('alarm_type');
             $table->string('alarm_status');
             $table->softDeletes();
