@@ -37,20 +37,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td class="text-center">{{ ucfirst($item->user_type) }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('profile-view', ['id' => $item->id]) }}"
-                                            class="btn btn-primary btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm"
-                                            wire:click.prevent="delete({{ $item->id }})">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
+
                                 </tr>
                             @endforeach
                         @else
