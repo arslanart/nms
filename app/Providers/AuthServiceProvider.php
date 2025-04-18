@@ -32,6 +32,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->user_type === 'Admin';
         });
 
+        Gate::define('admin-create-device', function ($user) {
+            return $user->user_type === 'Admin';
+        });
+
         Gate::define('admin-edit-menu', function ($user) {
             return $user->user_type === 'Admin';
         });
