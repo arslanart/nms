@@ -5,6 +5,7 @@
                 <div class="col-sm-6">
                     <h1>Group</h1>
                 </div>
+                @can('admin-create-group')
                 <div class="col-sm-6 text-right">
                     @if (!$showForm)
                         <button class="btn btn-success" wire:click="createGroup">
@@ -12,6 +13,7 @@
                         </button>
                     @endif
                 </div>
+                @endcan
             </div>
         </div>
     </section>
