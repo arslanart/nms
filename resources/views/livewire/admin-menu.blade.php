@@ -34,8 +34,8 @@
                     <form wire:submit.prevent="saveUser">
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="name" wire:model="name" class="form-control">
-                            @error('name')
+                            <input type="text" id="name" wire:model="username" class="form-control">
+                            @error('username')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -64,7 +64,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-success">Create</button>
                         <button type="button" class="btn btn-danger" wire:click="hideUserForm">Cancel</button>
                     </form>
                 </div>
@@ -91,7 +91,7 @@
                             @foreach ($data as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->username }}</td>
                                     <td class="text-center">{{ ucfirst($item->user_type) }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td class="text-center">

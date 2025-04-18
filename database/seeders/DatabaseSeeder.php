@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert(
             [
                 [
-                    'name' => 'admin1111',
+                    'username' => 'admin1111',
                     'user_type' => 'Admin',
                     'email' => 'admin@aa.com',
                     'password' => bcrypt('12345678'),
                 ],
                 [
-                    'name' => 'user1111',
+                    'username' => 'viewer1111',
                     'user_type' => 'Viewer',
                     'email' => 'user@aa.com',
                     'password' => bcrypt('12345678'),

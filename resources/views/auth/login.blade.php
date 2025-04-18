@@ -67,8 +67,8 @@
                             @csrf
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="loginusername">Email</label>
-                                    <input type="text" id="email" class="form-control" name="email"
+                                    <label for="loginusername">Username</label>
+                                    <input type="text" id="username" class="form-control" name="username"
                                         placeholder="Enter your email" required>
                                 </div>
                             </div>

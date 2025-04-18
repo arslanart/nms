@@ -9,12 +9,12 @@ use Livewire\Withpagination;
 class AdminMenu extends Component
 {
     use WithPagination;
-    public $users, $name, $email, $password, $user_type;
+    public $users, $username, $email, $password, $user_type;
     protected $paginationTheme = 'bootstrap';
     public $showForm = false;
 
     protected $rules = [
-        'name' => 'required|string|max:255',
+        'username' => 'required|string|max:255',
         'user_type' => 'required|string|max:255',
         'email' => 'required|email|max:255',
         'password' => 'required|string|min:8',
@@ -22,13 +22,13 @@ class AdminMenu extends Component
 
     public function createUser() // ฟังก์ชันสร้างผู้ใช้ใหม่
     {
-        $this->reset(['name', 'email', 'password', 'user_type']);
+        $this->reset(['username', 'email', 'password', 'user_type']);
         $this->showForm = true; // แสดงฟอร์มสร้างผู้ใช้
     }
 
     public function hideUserForm() // ฟังก์ชันซ่อนฟอร์มสร้างผู้ใช้
     {
-        $this->reset(['name', 'email', 'password', 'user_type']);
+        $this->reset(['username', 'email', 'password', 'user_type']);
         $this->showForm = false; // ซ่อนฟอร์มสร้างผู้ใช้
     }
 
@@ -38,7 +38,7 @@ class AdminMenu extends Component
             $this->validate();
 
             User::create([
-                'name' => $this->name,
+                'username' => $this->username,
                 'user_type' => $this->user_type,
                 'email' => $this->email,
                 'password' => bcrypt($this->password),
