@@ -44,11 +44,12 @@ class AdminMenu extends Component
                 'password' => bcrypt($this->password),
             ]);
 
-            $this->reset(['name', 'email', 'password', 'user_type', 'showForm']);
+            $this->reset(['username', 'email', 'password', 'user_type', 'showForm']);
             session()->flash('message', 'User created successfully.');
         } catch (\Exception $e) {
             session()->flash('error', 'An error occurred: ' . $e->getMessage());
         }
+        // dd($this->username, $this->email, $this->password, $this->user_type);
     }
 
     public function mount() // โหลดข้อมูลผู้ใช้

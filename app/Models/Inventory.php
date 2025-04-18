@@ -11,16 +11,26 @@ class Inventory extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'id',
-        'group_id',
-        'name',
-        'description',
-        'serial_number',
-        'model_number',
-        'mac_address',
+       'inventory_name',
+        'region',
+        'connection_type',
+        'port_info',
+        'city_location',
+        'building_name',
+        'floor',
+        'room_name',
+        'installation_date',
+        'asset_code',
+        'contractor_company',
+        'contractor_number',
+        'warranty_expiration_date',
         'ip_address',
-        'port',
-        'multicast_address',
+        'mac_address',
+        'gateway',
+        'subnet_mask',
+        'hardware_serial_number',
+        'software_version',
+        'device_status'
     ];
     //
 }

@@ -28,8 +28,8 @@ return new class extends Migration
             $table->date('warranty_expiration_date');
             $table->string('ip_address');
             $table->string('mac_address');
-            $table->string('gateaway');
-            $table->string('subnetmask');
+            $table->string('gateway');
+            $table->string('subnet_mask');
             $table->string('hardware_serial_number');
             $table->string('software_version');
             $table->string('device_status');

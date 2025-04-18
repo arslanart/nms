@@ -32,26 +32,26 @@
                     <form wire:submit.prevent="saveGroup">
                         <div class="form-group">
                             <label for="group_name">Group Name</label>
-                            <input type="text" wire:model="group_name" class="form-control">
+                            <input type="text" wire:model="group_name" class="form-control" placeholder="Enter group name">
                             @error('group_name')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="port">Port</label>
-                            <input type="text" wire:model="port" class="form-control">
+                            <input type="text" wire:model="port" class="form-control" placeholder="Enter port">
                             @error('port')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="multicast_address">Multicast Address</label>
-                            <input type="text" wire:model="multicast_address" class="form-control">
+                            <input type="text" wire:model="multicast_address" class="form-control" placeholder="Enter multicast address">
                             @error('multicast_address')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-success">Create</button>
                         <button type="button" class="btn btn-danger" wire:click="hideGroupForm">
                             Cancel
                         </button>
