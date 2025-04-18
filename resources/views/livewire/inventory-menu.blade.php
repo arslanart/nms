@@ -5,11 +5,13 @@
                 <div class="col-sm-6">
                     <h1>Inventory</h1>
                 </div>
+                @can('admin-create-device')
                 <div class="col-sm-6 text-right">
                     <button class="btn btn-success" wire:click="createInventory">
                         <i class="fas fa-plus"></i> Add Device
                     </button>
                 </div>
+                @endcan
             </div>
         </div>
     </section>
@@ -237,6 +239,7 @@
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        @can('admin-edit-menu')
                                         <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
@@ -245,6 +248,7 @@
                                             wire:click.prevent="delete({{ $item->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

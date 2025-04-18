@@ -5,6 +5,7 @@
                 <div class="col-sm-6">
                     <h1>Group</h1>
                 </div>
+                @can('admin-create-group')
                 <div class="col-sm-6 text-right">
                     @if (!$showForm)
                         <button class="btn btn-success" wire:click="createGroup">
@@ -12,6 +13,7 @@
                         </button>
                     @endif
                 </div>
+                @endcan
             </div>
         </div>
     </section>
@@ -87,6 +89,7 @@
                                         class="btn btn-primary btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
+                                    @can('admin-edit-menu')
                                     <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                         class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
@@ -95,6 +98,7 @@
                                         wire:click.prevent="delete({{ $item->id }})">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
