@@ -31,5 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-create-group', function ($user) {
             return $user->user_type === 'Admin';
         });
+
+        Gate::define('admin-edit-menu', function ($user) {
+            return $user->user_type === 'Admin';
+        });
     }
 }

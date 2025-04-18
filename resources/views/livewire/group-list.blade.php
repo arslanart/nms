@@ -89,6 +89,7 @@
                                         class="btn btn-primary btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
+                                    @can('admin-edit-menu')
                                     <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                         class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
@@ -97,6 +98,7 @@
                                         wire:click.prevent="delete({{ $item->id }})">
                                         <i class="fas fa-trash"></i>
                                     </button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
