@@ -88,15 +88,18 @@
                                     <td class="text-center">{{ $item->uptime }}</td>
                                     <td class="text-center">{{ $item->device_status }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('profile-view', ['id' => $item->id]) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#viewInventoryModal"
+                                            wire:click="loadInventory({{ $item->id }})">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        @can('admin-create-device')
                                         <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
                                             data-target="#editInventoryModal"
                                             wire:click="editInventory({{ $item->id }})">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                        @endcan
                                         @can('admin-edit-menu')
                                             <button class="btn btn-danger btn-sm"
                                                 wire:click.prevent="delete({{ $item->id }})">
@@ -119,6 +122,60 @@
             </div>
         </div>
     </section>
+
+    <!-- View Modal -->
+    <div class="modal fade" id="viewInventoryModal" tabindex="-1" role="dialog"
+        aria-labelledby="viewInventoryModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Device Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        {{-- แสดงชื่อแบบ Manual ได้ --}}
+                        <div class="col-md-6 mb-2">
+                            <strong>Device Name:</strong>
+                            <p>{{ $viewInventory['inventory_name'] ?? '-' }}</p>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Region:</strong>
+                            <p>{{ $viewInventory['region'] ?? '-' }}</p>
+                        </div>
+
+                        {{-- แสดง field อื่น ๆ ด้วย @foreach --}}
+                        @foreach ([
+        'city_location' => 'City Location',
+        'building_name' => 'Building Name',
+        'floor' => 'Floor',
+        'room_name' => 'Room Name',
+        'installation_date' => 'Installation Date',
+        'asset_code' => 'Asset Code',
+        'contractor_company' => 'Contractor Company',
+        'contractor_number' => 'Contractor Number',
+        'warranty_expiration_date' => 'Warranty Expiration Date',
+        'ip_address' => 'IP Address',
+        'mac_address' => 'Mac Address',
+        'gateway' => 'Gateway',
+        'subnet_mask' => 'Subnetmask',
+        'hardware_serial_number' => 'Hardware Serial Number',
+        'software_version' => 'Software Version',
+        'device_status' => 'Device Status',
+    ] as $field => $label)
+                            <div class="col-md-6 mb-2">
+                                <strong>{{ $label }}:</strong>
+                                <p>{{ $viewInventory[$field] ?? '-' }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="editInventoryModal" tabindex="-1" role="dialog"
@@ -227,7 +284,12 @@
 </div>
 
 <script>
+    window.addEventListener('open-view-modal', event => {
+        $('#viewInventoryModal').modal('show');
+    });
+
     window.addEventListener('close-modal', event => {
         $('#editInventoryModal').modal('hide');
+        $('#viewInventoryModal').modal('hide');
     });
 </script>

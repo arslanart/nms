@@ -16,6 +16,15 @@ class InventoryMenu extends Component
     public $showForm = false;
     public $user_id;
     public $inventoryId;
+    public $viewInventory = [];
+
+    public function loadInventory($id)
+    {
+        $inventory = Inventory::findOrFail($id);
+        $this->viewInventory = $inventory->toArray();
+    }
+
+
 
     public function editInventory($id)
     {
