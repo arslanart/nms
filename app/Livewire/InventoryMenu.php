@@ -20,7 +20,7 @@ class InventoryMenu extends Component
     public function editInventory($id)
     {
         $this->inventoryId = $id;
-        $this->inventory = Inventory::findOrFail($id);
+        $this->inventory = Inventory::findOrFail($id)->toArray();
     }
 
     public function updateInventory()
@@ -53,7 +53,7 @@ class InventoryMenu extends Component
         $inventory->update($this->inventory);
 
         session()->flash('message', 'Device updated successfully.');
-        $this->dispatchBrowserEvent('close-modal');
+        $this->dispatch('close-modal');
     }
 
     private function resetInventory()
