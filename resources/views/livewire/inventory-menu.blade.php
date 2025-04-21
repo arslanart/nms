@@ -6,11 +6,11 @@
                     <h1>Inventory</h1>
                 </div>
                 @can('admin-create-device')
-                <div class="col-sm-6 text-right">
-                    <button class="btn btn-success" wire:click="createInventory">
-                        <i class="fas fa-plus"></i> Add Device
-                    </button>
-                </div>
+                    <div class="col-sm-6 text-right">
+                        <button class="btn btn-success" wire:click="createInventory">
+                            <i class="fas fa-plus"></i> Add Device
+                        </button>
+                    </div>
                 @endcan
             </div>
         </div>
@@ -239,15 +239,16 @@
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        @can('admin-edit-menu')
-                                        <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
-                                            class="btn btn-warning btn-sm">
+                                        <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#editInventoryModal"
+                                            wire:click="editInventory({{ $item->id }})">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button class="btn btn-danger btn-sm"
-                                            wire:click.prevent="delete({{ $item->id }})">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        @can('admin-edit-menu')
+                                            <button class="btn btn-danger btn-sm"
+                                                wire:click.prevent="delete({{ $item->id }})">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -265,4 +266,61 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editInventoryModal" tabindex="-1" role="dialog"
+        aria-labelledby="editInventoryModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editInventoryModalLabel">Edit Device</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="updateInventory">
+                        <div class="form-group">
+                            <label for="inventory_name">Device Name</label>
+                            <input type="text" wire:model="inventory.inventory_name" class="form-control"
+                                placeholder="Enter device name">
+                            @error('inventory.inventory_name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Region</label>
+                            <select id="region" wire:model="inventory.region" class="form-control">
+                                <option value="">Please Choose Region</option>
+                                <option value="North">North</option>
+                                <option value="East">East</option>
+                                <option value="West">West</option>
+                                <option value="South">South</option>
+                            </select>
+                            @error('inventory.region')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="connection_type">Connection Type</label>
+                            <input type="text" wire:model="inventory.connection_type" class="form-control"
+                                placeholder="Enter connection type">
+                            @error('inventory.connection_type')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <!-- Add more fields as needed -->
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    window.addEventListener('close-modal', event => {
+        $('#editInventoryModal').modal('hide');
+    });
+</script>

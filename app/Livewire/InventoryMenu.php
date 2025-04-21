@@ -15,6 +15,46 @@ class InventoryMenu extends Component
     public $inventory = [];
     public $showForm = false;
     public $user_id;
+    public $inventoryId;
+
+    public function editInventory($id)
+    {
+        $this->inventoryId = $id;
+        $this->inventory = Inventory::findOrFail($id);
+    }
+
+    public function updateInventory()
+    {
+        $this->validate([
+            'inventory.inventory_name' => 'required|string|max:255',
+            'inventory.region' => 'required|string|max:255',
+            'inventory.connection_type' => 'required|string|max:255',
+            'inventory.port_info' => 'required|string|max:255',
+            'inventory.city_location' => 'required|string|max:255',
+            'inventory.building_name' => 'required|string|max:255',
+            'inventory.floor' => 'required|string|max:255',
+            'inventory.room_name' => 'required|string|max:255',
+            'inventory.installation_date' => 'required|date',
+            'inventory.asset_code' => 'required|string|max:255',
+            'inventory.contractor_company' => 'required|string|max:255',
+            'inventory.contractor_number' => 'required|string|max:255',
+            'inventory.warranty_expiration_date' => 'required|string|max:255',
+            'inventory.ip_address' => 'required|string|max:255',
+            'inventory.mac_address' => 'required|string|max:255',
+            'inventory.gateway' => 'required|string|max:255',
+            'inventory.subnet_mask' => 'required|string|max:255',
+            'inventory.hardware_serial_number' => 'required|string|max:255',
+            'inventory.software_version' => 'required|string|max:255',
+            'inventory.device_status' => 'required|string|max:255',
+
+        ]);
+
+        $inventory = Inventory::findOrFail($this->inventoryId);
+        $inventory->update($this->inventory);
+
+        session()->flash('message', 'Device updated successfully.');
+        $this->dispatchBrowserEvent('close-modal');
+    }
 
     private function resetInventory()
     {
@@ -48,8 +88,6 @@ class InventoryMenu extends Component
         $this->resetInventory();
         $this->showForm = true;
         $this->resetPage();
-        // $this->user_id = Auth::id();
-        // $this->inventory['user_id'] = $this->user_id;
     }
 
     public function hideInventoryForm()
