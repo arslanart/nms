@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Inventory;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
+
 
 class InventoryMenu extends Component
 {
@@ -12,6 +14,7 @@ class InventoryMenu extends Component
     protected $paginationTheme = 'bootstrap';
     public $inventory = [];
     public $showForm = false;
+    public $user_id;
 
     private function resetInventory()
     {
@@ -45,6 +48,8 @@ class InventoryMenu extends Component
         $this->resetInventory();
         $this->showForm = true;
         $this->resetPage();
+        // $this->user_id = Auth::id();
+        // $this->inventory['user_id'] = $this->user_id;
     }
 
     public function hideInventoryForm()
@@ -78,33 +83,18 @@ class InventoryMenu extends Component
             'inventory.device_status' => 'required|string|max:255',
         ]);
 
+        // ✅ เพิ่ม user_id ก่อนจะบันทึก
+        $this->inventory['user_id'] = Auth::id();
+
+        // ✅ บันทึก inventory พร้อม user_id
         Inventory::create($this->inventory);
 
-        $this->inventory = [
-            'inventory_name' => '',
-            'region' => '',
-            'connection_type' => '',
-            'port_info' => '',
-            'city_location' => '',
-            'building_name' => '',
-            'floor' => '',
-            'room_name' => '',
-            'installation_date' => '',
-            'asset_code' => '',
-            'contractor_company' => '',
-            'contractor_number' => '',
-            'warranty_expiration_date' => '',
-            'ip_address' => '',
-            'mac_address' => '',
-            'gateway' => '',
-            'subnet_mask' => '',
-            'hardware_serial_number' => '',
-            'software_version' => '',
-            'device_status' => '',
-        ];
+        // ✅ เคลียร์ข้อมูลฟอร์ม
+        $this->resetInventory();
         $this->showForm = false;
         session()->flash('message', 'Inventory created successfully.');
     }
+
 
     public function delete($id)
     {

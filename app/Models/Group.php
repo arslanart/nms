@@ -11,9 +11,9 @@ class Group extends Model
 {
     use HasFactory, SoftDeletes;
 
-    // protected $primaryKey = 'id';
-    // public $incrementing = true;
-    // protected $keyType = 'int';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
 
     protected $fillable = [

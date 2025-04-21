@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alarm extends Model
 {
+    public $incrementing = true;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'alarm_name',

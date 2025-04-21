@@ -36,8 +36,8 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreignId('user_id')->index();
-            $table->foreignId('alarm_id')->index();
-            $table->foreignId('group_id')->index();
+            $table->foreignId('alarm_id')->index()->nullable();
+            $table->foreignId('group_id')->index()->nullable();
 
             $table->timestamps();
         });

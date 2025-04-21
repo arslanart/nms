@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Inventory extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $primaryKey = 'id';
+    public $incrementing = true;
     protected $fillable = [
        'inventory_name',
         'region',
@@ -30,7 +33,8 @@ class Inventory extends Model
         'subnet_mask',
         'hardware_serial_number',
         'software_version',
-        'device_status'
+        'device_status',
+        'user_id'
     ];
     //
 }
