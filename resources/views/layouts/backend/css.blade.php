@@ -23,7 +23,7 @@
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('asset/backend/plugins/summernote/summernote-bs4.min.css') }}">
 
-<link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+{{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
 <link rel="stylesheet" href="{{ asset('asset/backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 {{-- asset/backend/plugins/jquery/jquery.min.js --}}
 <!-- เพิ่ม Bootstrap 5 -->
