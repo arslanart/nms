@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Inventory;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class InventoryMenu extends Component

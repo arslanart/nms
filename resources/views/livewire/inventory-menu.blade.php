@@ -94,11 +94,11 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         @can('admin-create-device')
-                                        <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
-                                            data-target="#editInventoryModal"
-                                            wire:click="editInventory({{ $item->id }})">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                            <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                data-target="#editInventoryModal"
+                                                wire:click="editInventory({{ $item->id }})">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                         @endcan
                                         @can('admin-edit-menu')
                                             <button class="btn btn-danger btn-sm"
@@ -167,7 +167,13 @@
     ] as $field => $label)
                             <div class="col-md-6 mb-2">
                                 <strong>{{ $label }}:</strong>
-                                <p>{{ $viewInventory[$field] ?? '-' }}</p>
+                                <p>
+                                    @if (in_array($field, ['installation_date', 'warranty_expiration_date']) && !empty($viewInventory[$field]))
+                                        {{ \Carbon\Carbon::parse($viewInventory[$field])->format('d/m/Y') }}
+                                    @else
+                                        {{ $viewInventory[$field] ?? '-' }}
+                                    @endif
+                                </p>
                             </div>
                         @endforeach
                     </div>
