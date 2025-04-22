@@ -34,7 +34,7 @@
                     <form wire:submit.prevent="saveUser">
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="name" wire:model="username" class="form-control" placeholder="Enter username">
+                            <input type="text" id="username" wire:model="username" class="form-control" placeholder="Enter username">
                             @error('username')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
