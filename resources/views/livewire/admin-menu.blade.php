@@ -171,7 +171,7 @@
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="email" wire:model.defer="editUser.password" class="form-control">
+                        <input type="password" wire:model.defer="editUser.password" class="form-control">
                         @error('editUser.password') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
