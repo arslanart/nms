@@ -102,10 +102,12 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
+   data-target="#editUserModal"
+   wire:click="editUser({{ $item->id }})">
+   <i class="fas fa-edit"></i>
+</a>
+
                                         <button class="btn btn-danger btn-sm" wire:click.prevent="delete({{ $item->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -149,5 +151,53 @@
         </div>
     </div>
 </div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal-dialog" role="document">
+        <form wire:submit.prevent="updateUser">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" wire:model.defer="editUser.username" class="form-control">
+                        @error('editUser.username') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="email" wire:model.defer="editUser.password" class="form-control">
+                        @error('editUser.password') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" wire:model.defer="editUser.email" class="form-control">
+                        @error('editUser.email') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>User Type</label>
+                        <select wire:model.defer="editUser.user_type" class="form-control">
+                            <option value="">Select type</option>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                        @error('editUser.user_type') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <!-- เพิ่มฟิลด์อื่นๆ ตามต้องการ -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 </div>

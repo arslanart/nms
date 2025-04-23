@@ -12,6 +12,9 @@ class AdminMenu extends Component
     public $users, $username, $email, $password, $user_type, $viewUser= [];
     protected $paginationTheme = 'bootstrap';
     public $showForm = false;
+    public $editUser = [];
+public $editUserId;
+
 
     protected $rules = [
         'username' => 'required|string|max:255',
@@ -31,6 +34,31 @@ class AdminMenu extends Component
         $this->reset(['username', 'email', 'password', 'user_type']);
         $this->showForm = true; // แสดงฟอร์มสร้างผู้ใช้
     }
+
+    public function editUser($id)
+{
+    $this->editUserId = $id;
+    $user = \App\Models\User::findOrFail($id);
+    $this->editUser = $user->toArray();
+}
+
+public function updateUser()
+{
+    $this->validate([
+        'editUser.username' => 'required|string|max:255',
+        'editUser.password' => 'required|string|max:255',
+        'editUser.email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
+        'editUser.user_type' => 'required|string',
+        // เพิ่ม field เพิ่มเติมถ้าจำเป็น
+    ]);
+
+    $user = \App\Models\User::findOrFail($this->editUserId);
+    $user->update($this->editUser);
+
+    session()->flash('message', 'User updated successfully.');
+    $this->dispatch('close-modal');
+}
+
 
     public function hideUserForm() // ฟังก์ชันซ่อนฟอร์มสร้างผู้ใช้
     {
