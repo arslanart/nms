@@ -34,7 +34,8 @@
                     <form wire:submit.prevent="saveUser">
                         <div class="form-group">
                             <label for="name">Username</label>
-                            <input type="text" id="username" wire:model="username" class="form-control" placeholder="Enter username">
+                            <input type="text" id="username" wire:model="username" class="form-control"
+                                placeholder="Enter username">
                             @error('username')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -59,7 +60,8 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" wire:model="password" class="form-control" placeholder="Enter password">
+                            <input type="password" id="password" wire:model="password" class="form-control"
+                                placeholder="Enter password">
                             @error('password')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -79,7 +81,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="bg-dark-secondary text-dark">
                         <tr>
-                            <th style="width: 10%"scope="col" class="text-center">No.</th>
+                            <th style="width: 10%" scope="col" class="text-center">No.</th>
                             <th scope="col" class="text-center">Username</th>
                             <th scope="col" class="text-center">Level</th>
                             <th scope="col" class="text-center">Email</th>
@@ -95,16 +97,16 @@
                                     <td class="text-center">{{ ucfirst($item->user_type) }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('profile-view', ['id' => $item->id]) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                                            data-target="#viewUserModal" wire:click="loadUser({{ $item->id }})">
                                             <i class="fas fa-eye"></i>
                                         </a>
+
                                         <a href="{{ route('profile-edit', ['id' => $item->id]) }}"
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button class="btn btn-danger btn-sm"
-                                            wire:click.prevent="delete({{ $item->id }})">
+                                        <button class="btn btn-danger btn-sm" wire:click.prevent="delete({{ $item->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -123,4 +125,29 @@
             </div>
         </div>
     </section>
+
+    <!-- View User Modal -->
+<div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" aria-labelledby="viewUserModalLabel" aria-hidden="true" wire:ignore.self>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if(!empty($viewUser))
+                    <p><strong>Username:</strong> {{ $viewUser['username'] ?? '-' }}</p>
+                    <p><strong>Email:</strong> {{ $viewUser['email'] ?? '-' }}</p>
+                    <p><strong>User Type:</strong> {{ ucfirst($viewUser['user_type'] ?? '-') }}</p>
+                    <p><strong>Created At:</strong> {{ $viewUser['created_at'] ?? '-' }}</p>
+                @else
+                    <p>No data found.</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>

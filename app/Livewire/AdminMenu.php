@@ -9,7 +9,7 @@ use Livewire\Withpagination;
 class AdminMenu extends Component
 {
     use WithPagination;
-    public $users, $username, $email, $password, $user_type;
+    public $users, $username, $email, $password, $user_type, $viewUser= [];
     protected $paginationTheme = 'bootstrap';
     public $showForm = false;
 
@@ -19,6 +19,12 @@ class AdminMenu extends Component
         'email' => 'required|email|max:255',
         'password' => 'required|string|min:8',
     ];
+
+    public function loadUser($id)
+{
+    $user = \App\Models\User::findOrFail($id);
+    $this->viewUser = $user->toArray();
+}
 
     public function createUser() // ฟังก์ชันสร้างผู้ใช้ใหม่
     {
