@@ -33,3 +33,5 @@
 {{-- <script src="{{asset('asset/backend/dist/js/pages/dashboard.js')}}"></script> --}}
 <script src="{{asset('asset/backend/dist/js/sb-admin-2.js')}}"></script>
 <script src="{{asset('asset/backend/dist/js/sb-admin-2.min.js')}}"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
