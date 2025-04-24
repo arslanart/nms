@@ -9,11 +9,11 @@ use Livewire\Withpagination;
 class AdminMenu extends Component
 {
     use WithPagination;
-    public $users, $username, $email, $password, $user_type, $viewUser= [];
+    public $users, $username, $email, $password, $user_type, $viewUser = [];
     protected $paginationTheme = 'bootstrap';
     public $showForm = false;
-    public $editUser = [];
-public $editUserId;
+    // public $editUser = [];
+    public $editUserId;
 
 
     protected $rules = [
@@ -24,10 +24,10 @@ public $editUserId;
     ];
 
     public function loadUser($id)
-{
-    $user = \App\Models\User::findOrFail($id);
-    $this->viewUser = $user->toArray();
-}
+    {
+        $user = \App\Models\User::findOrFail($id);
+        $this->viewUser = $user->toArray();
+    }
 
     public function createUser() // ฟังก์ชันสร้างผู้ใช้ใหม่
     {
@@ -36,28 +36,36 @@ public $editUserId;
     }
 
     public function editUser($id)
-{
-    $this->editUserId = $id;
-    $user = \App\Models\User::findOrFail($id);
-    $this->editUser = $user->toArray();
-}
+    {
+        try {
+            $this->editUserId = $id;
+            $user = User::findOrFail($id);
 
-public function updateUser()
-{
-    $this->validate([
-        'editUser.username' => 'required|string|max:255',
-        'editUser.password' => 'required|string|max:255',
-        'editUser.email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
-        'editUser.user_type' => 'required|string',
-        // เพิ่ม field เพิ่มเติมถ้าจำเป็น
-    ]);
+            $this->username = $user->username;
+            $this->email = $user->email;
+            $this->password = $user->password;
+            $this->user_type = $user->user_type;
+        } catch (\Exception $e) {
+            dd($e);
+        }
+    }
 
-    $user = \App\Models\User::findOrFail($this->editUserId);
-    $user->update($this->editUser);
+    // public function updateUser()
+    // {
+    //     $this->validate([
+    //         'username' => 'required|string|max:255',
+    //         'password' => 'required|string|max:255',
+    //         'email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
+    //         'user_type' => 'required|string',
+    //         // เพิ่ม field เพิ่มเติมถ้าจำเป็น
+    //     ]);
 
-    session()->flash('message', 'User updated successfully.');
-    $this->dispatch('close-modal');
-}
+    //     $user = User::findOrFail($this->editUserId);
+    //     $user->update($this->editUser);
+
+    //     session()->flash('message', 'User updated successfully.');
+    //     $this->dispatch('close-modal');
+    // }
 
 
     public function hideUserForm() // ฟังก์ชันซ่อนฟอร์มสร้างผู้ใช้
@@ -81,7 +89,7 @@ public function updateUser()
             $this->reset(['username', 'email', 'password', 'user_type', 'showForm']);
             session()->flash('message', 'User created successfully.');
         } catch (\Exception $e) {
-            session()->flash('error', 'An error occurred: ' . $e->getMessage());
+            dd($e->getMessage());
         }
         // dd($this->username, $this->email, $this->password, $this->user_type);
     }

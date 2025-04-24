@@ -17,11 +17,15 @@
     </section>
 
     @if (session()->has('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
     @endif
 
     @if (session()->has('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
     @endif
 
     @if ($showForm)
@@ -53,7 +57,8 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" id="email" wire:model="email" class="form-control" placeholder="Enter email">
+                            <input type="text" id="email" wire:model="email" class="form-control"
+                                placeholder="Enter email">
                             @error('email')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -97,18 +102,18 @@
                                     <td class="text-center">{{ ucfirst($item->user_type) }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        {{-- <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
                                             data-target="#viewUserModal" wire:click="loadUser({{ $item->id }})">
                                             <i class="fas fa-eye"></i>
-                                        </a>
+                                        </a> --}}
 
                                         <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
-   data-target="#editUserModal"
-   wire:click="editUser({{ $item->id }})">
-   <i class="fas fa-edit"></i>
-</a>
+                                            data-target="#editUserModal" wire:click="editUser({{ $item->id }})">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
-                                        <button class="btn btn-danger btn-sm" wire:click.prevent="delete({{ $item->id }})">
+                                        <button class="btn btn-danger btn-sm"
+                                            wire:click.prevent="delete({{ $item->id }})">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
@@ -129,75 +134,85 @@
     </section>
 
     <!-- View User Modal -->
-<div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" aria-labelledby="viewUserModalLabel" aria-hidden="true" wire:ignore.self>
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">User Detail</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @if(!empty($viewUser))
-                    <p><strong>Username:</strong> {{ $viewUser['username'] ?? '-' }}</p>
-                    <p><strong>Email:</strong> {{ $viewUser['email'] ?? '-' }}</p>
-                    <p><strong>User Type:</strong> {{ ucfirst($viewUser['user_type'] ?? '-') }}</p>
-                    <p><strong>Created At:</strong> {{ $viewUser['created_at'] ?? '-' }}</p>
-                @else
-                    <p>No data found.</p>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true" wire:ignore.self>
-    <div class="modal-dialog" role="document">
-        <form wire:submit.prevent="updateUser">
+    {{-- <div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" aria-labelledby="viewUserModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit User</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
+                    <h5 class="modal-title">User Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" wire:model.defer="editUser.username" class="form-control">
-                        @error('editUser.username') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" wire:model.defer="editUser.password" class="form-control">
-                        @error('editUser.password') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" wire:model.defer="editUser.email" class="form-control">
-                        @error('editUser.email') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label>User Type</label>
-                        <select wire:model.defer="editUser.user_type" class="form-control">
-                            <option value="">Select type</option>
-                            <option value="Admin">Admin</option>
-                            <option value="User">User</option>
-                        </select>
-                        @error('editUser.user_type') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <!-- เพิ่มฟิลด์อื่นๆ ตามต้องการ -->
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    @if (!empty($viewUser))
+                        <p><strong>Username:</strong> {{ $viewUser['username'] ?? '-' }}</p>
+                        <p><strong>Email:</strong> {{ $viewUser['email'] ?? '-' }}</p>
+                        <p><strong>User Type:</strong> {{ ucfirst($viewUser['user_type'] ?? '-') }}</p>
+                        <p><strong>Created At:</strong> {{ $viewUser['created_at'] ?? '-' }}</p>
+                    @else
+                        <p>No data found.</p>
+                    @endif
                 </div>
             </div>
-        </form>
+        </div>
+    </div> --}}
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <form wire:submit.prevent="editUser">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit User</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" wire:model.defer="username" class="form-control">
+                            @error('username')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" wire:model.defer="password" class="form-control">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" wire:model.defer="email" class="form-control">
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>User Type</label>
+                            <select wire:model.defer="user_type" class="form-control">
+                                <option value="">Select type</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Viewer">Viewer</option>
+                            </select>
+                            @error('user_type')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <!-- เพิ่มฟิลด์อื่นๆ ตามต้องการ -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 
 </div>
