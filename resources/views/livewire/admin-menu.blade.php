@@ -162,7 +162,7 @@
     <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
         aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
-            <form wire:submit.prevent="editUser">
+            <form wire:submit.prevent="updateUser">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit User</h5>
@@ -207,12 +207,18 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function() {
+        Livewire.on('close-modal', () => {
+            $('#editUserModal').modal('hide');
+        });
+    });
+</script>

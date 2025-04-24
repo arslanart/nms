@@ -50,22 +50,37 @@ class AdminMenu extends Component
         }
     }
 
-    // public function updateUser()
-    // {
-    //     $this->validate([
-    //         'username' => 'required|string|max:255',
-    //         'password' => 'required|string|max:255',
-    //         'email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
-    //         'user_type' => 'required|string',
-    //         // เพิ่ม field เพิ่มเติมถ้าจำเป็น
-    //     ]);
+    public function updateUser()
+    {
+        $this->validate([
+            'username' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+            'email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
+            'user_type' => 'required|string|max:255',
+        ]);
 
-    //     $user = User::findOrFail($this->editUserId);
-    //     $user->update($this->editUser);
+        try {
+            $user = User::findOrFail($this->editUserId);
 
-    //     session()->flash('message', 'User updated successfully.');
-    //     $this->dispatch('close-modal');
-    // }
+            $user->update([
+                'username' => $this->username,
+                'password' => bcrypt($this->password),
+                'email' => $this->email,
+                'user_type' => $this->user_type,
+            ]);
+
+            session()->flash('message', 'User updated successfully.');
+
+            // รีเซ็ตข้อมูลฟอร์ม
+            $this->reset(['username', 'email', 'password', 'user_type', 'editUserId']);
+
+            // ซ่อน modal (ถ้าใช้ JS จัดการ modal)
+            $this->dispatch('close-modal');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error updating user: ' . $e->getMessage());
+        }
+    }
+
 
 
     public function hideUserForm() // ฟังก์ชันซ่อนฟอร์มสร้างผู้ใช้
