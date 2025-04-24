@@ -102,22 +102,16 @@
                                     <td class="text-center">{{ ucfirst($item->user_type) }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td class="text-center">
-                                        {{-- <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                            data-target="#viewUserModal" wire:click="loadUser({{ $item->id }})">
-                                            <i class="fas fa-eye"></i>
-                                        </a> --}}
-
                                         <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
                                             data-target="#editUserModal" wire:click="editUser({{ $item->id }})">
                                             <i class="fas fa-edit"></i>
                                         </a>
-
-                                        <button class="btn btn-danger btn-sm" wire:click.prevent="confirmDelete({{ $item->id }})">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-
-
-
+                                        @can('admin-delete')
+                                            <button class="btn btn-danger btn-sm"
+                                                wire:click.prevent="confirmDelete({{ $item->id }})">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
@@ -134,31 +128,6 @@
             </div>
         </div>
     </section>
-
-    <!-- View User Modal -->
-    {{-- <div class="modal fade" id="viewUserModal" tabindex="-1" role="dialog" aria-labelledby="viewUserModalLabel"
-        aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">User Detail</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if (!empty($viewUser))
-                        <p><strong>Username:</strong> {{ $viewUser['username'] ?? '-' }}</p>
-                        <p><strong>Email:</strong> {{ $viewUser['email'] ?? '-' }}</p>
-                        <p><strong>User Type:</strong> {{ ucfirst($viewUser['user_type'] ?? '-') }}</p>
-                        <p><strong>Created At:</strong> {{ $viewUser['created_at'] ?? '-' }}</p>
-                    @else
-                        <p>No data found.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div> --}}
 
     <!-- Edit User Modal -->
     <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
@@ -226,7 +195,7 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('show-delete-confirmation', event => {
             Swal.fire({
                 title: 'คุณแน่ใจหรือไม่?',
@@ -246,14 +215,12 @@
 
         // แสดง alert message
         window.addEventListener('alert', () => {
-    Swal.fire({
-        icon: 'success',
-        title: 'ลบผู้ใช้สำเร็จ',
-        timer: 1500,
-        showConfirmButton: false,
-    });
-});
+            Swal.fire({
+                icon: 'success',
+                title: 'ลบผู้ใช้สำเร็จ',
+                timer: 1500,
+                showConfirmButton: false,
+            });
+        });
     });
 </script>
-
-
