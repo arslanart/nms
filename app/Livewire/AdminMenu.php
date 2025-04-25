@@ -14,7 +14,6 @@ class AdminMenu extends Component
     public $users, $username, $email, $password, $user_type, $viewUser = [];
     protected $paginationTheme = 'bootstrap';
     public $showForm = false;
-    // public $editUser = [];
     public $editUserId;
     public $delete_id;
     protected $listeners = ['deleteConfirmed'];
@@ -30,7 +29,7 @@ class AdminMenu extends Component
 
     public function loadUser($id)
     {
-        $user = \App\Models\User::findOrFail($id);
+        $user = User::findOrFail($id);
         $this->viewUser = $user->toArray();
     }
 
@@ -48,7 +47,6 @@ class AdminMenu extends Component
 
             $this->username = $user->username;
             $this->email = $user->email;
-            $this->password = $user->password;
             $this->user_type = $user->user_type;
         } catch (\Exception $e) {
             dd($e);
@@ -59,7 +57,6 @@ class AdminMenu extends Component
     {
         $this->validate([
             'username' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
             'email' => 'required|email|max:255|unique:users,email,' . $this->editUserId,
             'user_type' => 'required|string|max:255',
         ]);
@@ -69,7 +66,6 @@ class AdminMenu extends Component
 
             $user->update([
                 'username' => $this->username,
-                'password' => bcrypt($this->password),
                 'email' => $this->email,
                 'user_type' => $this->user_type,
             ]);
@@ -129,10 +125,9 @@ public function deleteConfirmed()
                 'username' => $this->username,
                 'user_type' => $this->user_type,
                 'email' => $this->email,
-                'password' => bcrypt($this->password),
             ]);
 
-            $this->reset(['username', 'email', 'password', 'user_type', 'showForm']);
+            // $this->reset(['username', 'email', 'password', 'user_type', 'showForm']);
             session()->flash('message', 'User created successfully.');
         } catch (\Exception $e) {
             dd($e->getMessage());
