@@ -76,39 +76,40 @@ class AdminMenu extends Component
             $this->reset(['username', 'email', 'password', 'user_type', 'editUserId']);
 
             // ซ่อน modal (ถ้าใช้ JS จัดการ modal)
-            $this->dispatch('close-modal');
+            Log::info('Dispatch closeModal event');
+            $this->dispatch('closeModal');
         } catch (\Exception $e) {
             session()->flash('error', 'Error updating user: ' . $e->getMessage());
         }
     }
 
     public function confirmDelete($id)
-{
-    $this->delete_id = $id;
+    {
+        $this->delete_id = $id;
 
-    // ส่ง Event ไปให้ JavaScript เพื่อแสดง SweetAlert
-    $this->dispatch('show-delete-confirmation');
-}
-public function deleteConfirmed()
-{
-    $user = User::find($this->delete_id);
-
-    if ($user) {
-        $user->delete();
-
-        Log::info('Deleting User ID: ' . $this->delete_id);
-
-        $this->dispatch('alert', [
-            'type' => 'success',
-            'message' => 'ลบผู้ใช้งานเรียบร้อยแล้ว'
-        ]);
-    } else {
-        $this->dispatch('alert', [
-            'type' => 'error',
-            'message' => 'ไม่พบผู้ใช้งานที่ต้องการลบ'
-        ]);
+        // ส่ง Event ไปให้ JavaScript เพื่อแสดง SweetAlert
+        $this->dispatch('show-delete-confirmation');
     }
-}
+    public function deleteConfirmed()
+    {
+        $user = User::find($this->delete_id);
+
+        if ($user) {
+            $user->delete();
+
+            Log::info('Deleting User ID: ' . $this->delete_id);
+
+            $this->dispatch('alert', [
+                'type' => 'success',
+                'message' => 'ลบผู้ใช้งานเรียบร้อยแล้ว'
+            ]);
+        } else {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'ไม่พบผู้ใช้งานที่ต้องการลบ'
+            ]);
+        }
+    }
 
     public function hideUserForm() // ฟังก์ชันซ่อนฟอร์มสร้างผู้ใช้
     {

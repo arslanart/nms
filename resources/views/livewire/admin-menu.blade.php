@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper responsive">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +17,7 @@
     </section>
 
     @if (session()->has('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-message">
             {{ session('message') }}
         </div>
     @endif
@@ -96,10 +96,14 @@
                     <tbody>
                         @if (!empty($data) && $data->isNotEmpty())
                             @foreach ($data as $item)
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                <tr class="text-center">
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->username }}</td>
-                                    <td class="text-center">{{ ucfirst($item->user_type) }}</td>
+                                    @if ($item->user_type == 'Admin')
+                                        <td class=" role-admin">{{ $item->user_type }}</td>
+                                    @else
+                                        <td class=" role-viewer">{{ $item->user_type }}</td>
+                                    @endif
                                     <td>{{ $item->email }}</td>
                                     <td class="text-center">
                                         <a href="#" class="btn btn-warning btn-sm" data-toggle="modal"
@@ -124,14 +128,14 @@
                 </table>
             </div>
             <div class="card-footer">
-                {{ $data->links('pagination::bootstrap-4') }}
+                {{ $data->links() }}
             </div>
         </div>
     </section>
 
     <!-- Edit User Modal -->
     <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
-        aria-hidden="true" wire:ignore.self>
+        aria-hidden="false" wire:ignore.self>
         <div class="modal-dialog" role="document">
             <form wire:submit.prevent="updateUser">
                 <div class="modal-content">
@@ -188,7 +192,7 @@
 
 <script>
     document.addEventListener('livewire:load', function() {
-        Livewire.on('close-modal', () => {
+        Livewire.on('closeModal', () => {
             $('#editUserModal').modal('hide');
         });
     });
@@ -222,5 +226,26 @@
                 showConfirmButton: false,
             });
         });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const message = document.getElementById('success-message');
+
+        if (message) {
+            // ใช้ fade out (Bootstrap ทำงาน)
+            setTimeout(() => {
+                message.classList.remove('show');
+                message.classList.add('fade');
+            }, 3000); // ปิดภายใน 3 วิ
+
+            // Fallback: ลบออกจาก DOM เผื่อ .fade ไม่ทำงาน
+            setTimeout(() => {
+                if (message.parentElement) {
+                    message.remove();
+                }
+            }, 5000); // ลบทิ้งภายใน 5 วิ
+        }
     });
 </script>

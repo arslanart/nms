@@ -130,6 +130,24 @@ address {
     line-height: inherit
 }
 
+.role-admin {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    display: inline-block; /* ให้ขนาดครอบพอดีกับตัวหนังสือ */
+    font-size: 0.875rem; /*ขนาดตัวหนังสือ (เล็กนิดนึง ถ้าต้องการ)*/
+}
+
+
+.role-viewer {
+    background-color: #bfbfbd;
+    color: rgb(0, 0, 0);
+    padding: 1px 1px;
+    border-radius: 5px;
+    display: inline-block; /* ให้ขนาดครอบพอดีกับตัวหนังสือ */
+    font-size: 0.875rem; /*ขนาดตัวหนังสือ (เล็กนิดนึง ถ้าต้องการ)*/
+}
+
 dl,
 ol,
 ul {
@@ -2248,7 +2266,8 @@ pre code {
 }
 
 .table-dark.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(255, 255, 255, .05)
+    background-color: rgba(255, 255, 255, .05);
+    border-block-end: 2px;
 }
 
 .table-dark.table-hover tbody tr:hover {
