@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckAdminAccess;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin-view',function(){
         return view('admin-view');
-    })->name('admin-view');
+    })->name('admin-view')->middleware(CheckAdminAccess::class);
 
     Route::get('/profile-view/{id}', function ($id) { //ดูข้อมูลโปรไฟล์
         return view('project.view', compact('id'));
