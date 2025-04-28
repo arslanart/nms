@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 class InventoryMenu extends Component
@@ -18,7 +19,8 @@ class InventoryMenu extends Component
     public $user_id;
     public $inventoryId;
     public $viewInventory = [];
-
+    public $delete_id;
+    protected $listeners = ['deleteConfirmed'];
     public function loadInventory($id)
     {
         $inventory = Inventory::findOrFail($id);
@@ -153,6 +155,34 @@ class InventoryMenu extends Component
     public function mount()
     {
         $this->resetInventory();
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->delete_id = $id;
+
+        // ส่ง Event ไปให้ JavaScript เพื่อแสดง SweetAlert
+        $this->dispatch('show-delete-confirmation');
+    }
+    public function deleteConfirmed()
+    {
+        $inventory = Inventory::find($this->delete_id);
+
+        if ($inventory) {
+            $inventory->delete();
+
+            Log::info('Deleting User ID: ' . $this->delete_id);
+
+            $this->dispatch('alert', [
+                'type' => 'success',
+                'message' => 'ลบผู้ใช้งานเรียบร้อยแล้ว'
+            ]);
+        } else {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'ไม่พบผู้ใช้งานที่ต้องการลบ'
+            ]);
+        }
     }
 
     public function render()
