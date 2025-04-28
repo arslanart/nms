@@ -101,10 +101,10 @@
                                             </a>
                                         @endcan
                                         @can('admin-edit-menu')
-                                            <button class="btn btn-danger btn-sm"
-                                                wire:click.prevent="delete({{ $item->id }})">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                        <button class="btn btn-danger btn-sm"
+                                        wire:click.prevent="confirmDelete({{ $item->id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -297,5 +297,36 @@
     window.addEventListener('close-modal', event => {
         $('#editInventoryModal').modal('hide');
         $('#viewInventoryModal').modal('hide');
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('show-delete-confirmation', event => {
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณต้องการลบอุปกรณ์นี้หรือไม่",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'ใช่, ลบเลย!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteConfirmed');
+                }
+            });
+        });
+
+        // แสดง alert message
+        window.addEventListener('alert', () => {
+            Swal.fire({
+                icon: 'success',
+                title: 'ลบอุปกรณ์สำเร็จ',
+                timer: 1500,
+                showConfirmButton: false,
+            });
+        });
     });
 </script>
