@@ -5,15 +5,17 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Group;
 use Livewire\WithPagination;
-
+use Illuminate\Support\Facades\Log;
 class GroupList extends Component
 {
     use WithPagination;
 
-    public $group_name, $port, $multicast_address;
+    public $group_name, $port, $multicast_address,$group;
     public $showForm = false;
 
     protected $paginationTheme = 'bootstrap';
+    public $delete_id;
+    protected $listeners = ['deleteConfirmed'];
 
     protected $rules = [
         'group_name' => 'required|string|max:255',
@@ -51,6 +53,35 @@ class GroupList extends Component
     {
         Group::findOrFail($id)->delete();
         session()->flash('message', 'Group deleted.');
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->delete_id = $id;
+
+        // ส่ง Event ไปให้ JavaScript เพื่อแสดง SweetAlert
+        $this->dispatch('show-delete-confirmation');
+    }
+
+    public function deleteConfirmed()
+    {
+        $group = Group::find($this->delete_id);
+
+        if ($group) {
+            $group->delete();
+
+            Log::info('Deleting User ID: ' . $this->delete_id);
+
+            $this->dispatch('alert', [
+                'type' => 'success',
+                'message' => 'ลบกลุ่มเรียบร้อยแล้ว'
+            ]);
+        } else {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'ไม่พบกลุ่มที่ต้องการลบ'
+            ]);
+        }
     }
 
     public function render()
