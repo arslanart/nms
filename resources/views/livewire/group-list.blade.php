@@ -121,7 +121,7 @@
         window.addEventListener('show-delete-confirmation', event => {
             Swal.fire({
                 title: 'คุณแน่ใจหรือไม่?',
-                text: "คุณต้องการลบผู้ใช้งานนี้หรือไม่",
+                text: "คุณต้องการลบกลุ่มนี้หรือไม่",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
