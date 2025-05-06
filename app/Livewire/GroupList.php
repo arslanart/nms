@@ -25,41 +25,46 @@ class GroupList extends Component
         'multicast_address' => 'required|string|max:20',
     ];
 
-    public function Loadgroup($id)
+    public function editGroup($id)
     {
         try {
-            $this->editGroupId = $id;
+            // ดึงข้อมูลกลุ่มจากฐานข้อมูล
             $group = Group::findOrFail($id);
 
+            // ตั้งค่าข้อมูลในฟอร์ม
+            $this->editGroupId = $id;
             $this->group_name = $group->group_name;
             $this->port = $group->port;
             $this->multicast_address = $group->multicast_address;
+
+            // แสดงฟอร์มแก้ไข
+            // $this->showForm = true;
         } catch (\Exception $e) {
-            dd($e);
+            session()->flash('error', 'Error loading group: ' . $e->getMessage());
         }
     }
 
-    public function editGroup()
+    public function updateGroup()
     {
-        $this->validate([
-            'group_name' => 'required|string|max:255',
-            'port' => 'required|string|max:10',
-            'multicast_address' => 'required|string|max:20',
-        ]);
-
         try {
-            $this->group = Group::findOrFail($this->editGroupId);
-            $this->group->update([
+            // ตรวจสอบข้อมูล
+            $this->validate();
+
+            // ดึงข้อมูลกลุ่มที่ต้องการแก้ไข
+            $group = Group::findOrFail($this->editGroupId);
+
+            // อัปเดตข้อมูล
+            $group->update([
                 'group_name' => $this->group_name,
                 'port' => $this->port,
                 'multicast_address' => $this->multicast_address,
             ]);
 
+            // รีเซ็ตฟอร์มและซ่อนฟอร์มแก้ไข
+            $this->reset(['group_name', 'port', 'multicast_address', 'editGroupId', 'showForm']);
             session()->flash('message', 'Group updated successfully.');
-            $this->dispatch('closeGroupModal');
         } catch (\Exception $e) {
-            Log::error('Error updating group: ' . $e->getMessage());
-            session()->flash('error', 'Failed to update group.');
+            session()->flash('error', 'Error updating group: ' . $e->getMessage());
         }
     }
 

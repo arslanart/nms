@@ -120,12 +120,12 @@
     <div class="modal fade" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
         aria-hidden="false" wire:ignore.self>
         <div class="modal-dialog" role="document">
-            <form wire:submit.prevent="updateUser">
+            <form wire:submit.prevent="editGroup">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Group</h5>
                         <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
