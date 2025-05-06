@@ -120,7 +120,7 @@
     <div class="modal fade" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
         aria-hidden="false" wire:ignore.self>
         <div class="modal-dialog" role="document">
-            <form wire:submit.prevent="editGroup">
+            <form wire:submit.prevent="updateGroup">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Group</h5>

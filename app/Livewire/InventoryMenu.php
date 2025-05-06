@@ -21,6 +21,7 @@ class InventoryMenu extends Component
     public $viewInventory = [];
     public $delete_id;
     protected $listeners = ['deleteConfirmed'];
+
     public function loadInventory($id)
     {
         $inventory = Inventory::findOrFail($id);
