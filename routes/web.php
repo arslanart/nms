@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminAccess;
 use Illuminate\Support\Facades\Route;
@@ -14,38 +13,35 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('user-dashboard',[UserController::class,'user'])->name('user-dashboard');
+    Route::get('user-dashboard', [UserController::class, 'user'])->name('user-dashboard');
 
-    Route::get('group',function(){
+    Route::get('group', function () {
         return view('group');
     })->name('group');
 
-    Route::get('view-group',function(){
+    Route::get('view-group', function () {
         return view('view-group');
     })->name('view-group');
 
-    Route::get('group-view/{id}',function ($id){
-        return view('group-view',compact('id'));
+    Route::get('group-view/{id}', function ($id) {
+        return view('group-view', compact('id'));
     })->name('group-view');
 
-    Route::get('group-edit/{id}',function ($id){
-        return view('group-edit',compact('id'));
+    Route::get('group-edit/{id}', function ($id) {
+        return view('group-edit', compact('id'));
     })->name('group-edit');
 
-    Route::get('inventory',function(){
+    Route::get('inventory', function () {
         return view('inventory');
     })->name('inventory');
 
-    Route::get('alarm',function(){
+    Route::get('alarm', function () {
         return view('alarm');
     })->name('alarm');
 
 
-    Route::get('admin-view',function(){
+    Route::get('admin-view', function () {
         return view('admin-view');
     })->name('admin-view')->middleware(CheckAdminAccess::class);
 
@@ -58,4 +54,4 @@ Route::middleware('auth')->group(function () {
     })->name('profile-edit');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
