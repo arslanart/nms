@@ -140,21 +140,21 @@ address {
 
 .status-minor {
     background-color: #e1e42b;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 1px 1px;
     border-radius: 5px;
 }
 
 .status-major {
     background-color: #fcb213;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 1px 1px;
     border-radius: 5px;
 }
 
 .status-critical {
     background-color: #ed2b11;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 1px 1px;
     border-radius: 5px;
 }

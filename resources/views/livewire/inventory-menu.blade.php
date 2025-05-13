@@ -157,27 +157,40 @@
 
                         {{-- แสดง field อื่น ๆ ด้วย @foreach --}}
                         @foreach ([
-        'city_location' => 'City Location',
-        'building_name' => 'Building Name',
-        'floor' => 'Floor',
-        'room_name' => 'Room Name',
-        'installation_date' => 'Installation Date',
-        'asset_code' => 'Asset Code',
-        'contractor_company' => 'Contractor Company',
-        'contractor_number' => 'Contractor Number',
-        'warranty_expiration_date' => 'Warranty Expiration Date',
-        'ip_address' => 'IP Address',
-        'mac_address' => 'Mac Address',
-        'gateway' => 'Gateway',
-        'subnet_mask' => 'Subnetmask',
-        'hardware_serial_number' => 'Hardware Serial Number',
-        'software_version' => 'Software Version',
-        'device_status' => 'Device Status',
-    ] as $field => $label)
+                            'city_location' => 'City Location',
+                            'building_name' => 'Building Name',
+                            'floor' => 'Floor',
+                            'room_name' => 'Room Name',
+                            'installation_date' => 'Installation Date',
+                            'asset_code' => 'Asset Code',
+                            'contractor_company' => 'Contractor Company',
+                            'contractor_number' => 'Contractor Number',
+                            'warranty_expiration_date' => 'Warranty Expiration Date',
+                            'ip_address' => 'IP Address',
+                            'mac_address' => 'Mac Address',
+                            'gateway' => 'Gateway',
+                            'subnet_mask' => 'Subnetmask',
+                            'hardware_serial_number' => 'Hardware Serial Number',
+                            'software_version' => 'Software Version',
+                            'device_status' => 'Device Status',
+                        ] as $field => $label)
                             <div class="col-md-6 mb-2">
                                 <strong>{{ $label }}:</strong>
                                 <p>
-                                    @if (in_array($field, ['installation_date', 'warranty_expiration_date']) && !empty($viewInventory[$field]))
+                                    @if ($field === 'device_status')
+                                        @php
+                                            $status = strtolower($viewInventory[$field] ?? '');
+                                        @endphp
+                                        @if ($status === 'minor')
+                                            <span class="badge status-minor">Minor</span>
+                                        @elseif ($status === 'major')
+                                            <span class="badge status-major">Major</span>
+                                        @elseif ($status === 'critical')
+                                            <span class="badge status-critical">Critical</span>
+                                        @else
+                                            <span class="badge badge-secondary">{{ $viewInventory[$field] ?? '-' }}</span>
+                                        @endif
+                                    @elseif (in_array($field, ['installation_date', 'warranty_expiration_date']) && !empty($viewInventory[$field]))
                                         {{ \Carbon\Carbon::parse($viewInventory[$field])->format('d/m/Y') }}
                                     @else
                                         {{ $viewInventory[$field] ?? '-' }}
@@ -255,23 +268,23 @@
 
                             {{-- เพิ่มรายการอื่น ๆ ในรูปแบบเดียวกัน --}}
                             @foreach ([
-        'city_location' => 'City Location',
-        'building_name' => 'Building Name',
-        'floor' => 'Floor',
-        'room_name' => 'Room Name',
-        'installation_date' => 'Installation Date',
-        'asset_code' => 'Asset Code',
-        'contractor_company' => 'Contractor Company',
-        'contractor_number' => 'Contractor Number',
-        'warranty_expiration_date' => 'Warranty Expiration Date',
-        'ip_address' => 'IP Address',
-        'mac_address' => 'Mac Address',
-        'gateway' => 'Gateway',
-        'subnet_mask' => 'Subnetmask',
-        'hardware_serial_number' => 'Hardware Serial Number',
-        'software_version' => 'Software Version',
-        'device_status' => 'Device Status',
-    ] as $field => $label)
+                                'city_location' => 'City Location',
+                                'building_name' => 'Building Name',
+                                'floor' => 'Floor',
+                                'room_name' => 'Room Name',
+                                'installation_date' => 'Installation Date',
+                                'asset_code' => 'Asset Code',
+                                'contractor_company' => 'Contractor Company',
+                                'contractor_number' => 'Contractor Number',
+                                'warranty_expiration_date' => 'Warranty Expiration Date',
+                                'ip_address' => 'IP Address',
+                                'mac_address' => 'Mac Address',
+                                'gateway' => 'Gateway',
+                                'subnet_mask' => 'Subnetmask',
+                                'hardware_serial_number' => 'Hardware Serial Number',
+                                'software_version' => 'Software Version',
+                                'device_status' => 'Device Status',
+                            ] as $field => $label)
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="{{ $field }}">{{ $label }}</label>
