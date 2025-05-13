@@ -86,13 +86,13 @@
                                     <td class="text-center">{{ $item->ip_address }}</td>
                                     <td class="text-center">{{ $item->group_name }}</td>
                                     <td class="text-center">{{ $item->uptime }}</td>
-                                    {{-- <td class="text-center">{{ $item->device_status }}</td> --}}
+                                    {{-- <td class="text-center status-minor">{{ $item->device_status }}</td> --}}
                                     <td class="text-center">
-                                        @if ($item->device_status == 'Minor' && $item->device_status == 'minor')
+                                        @if ($item->device_status == 'Minor' || $item->device_status == 'minor')
                                             <span class="badge status-minor">Minor</span>
-                                        @elseif($item->device_status == 'Major' && $item->device_status == 'major')
+                                        @elseif($item->device_status == 'Major' || $item->device_status == 'major')
                                             <span class="badge status-major">Major</span>
-                                        @elseif($item->device_status == 'Critical' && $item->device_status == 'critical')
+                                        @elseif($item->device_status == 'Critical' || $item->device_status == 'critical')
                                             <span class="badge status-critical">Critical</span>
                                         @endif
                                     </td>
