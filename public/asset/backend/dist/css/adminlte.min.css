@@ -138,6 +138,26 @@ address {
     font-size: 0.875rem; /*ขนาดตัวหนังสือ (เล็กนิดนึง ถ้าต้องการ)*/
 }
 
+.status-minor {
+    background-color: #e1e42b;
+    color: white;
+    padding: 1px 1px;
+    border-radius: 5px;
+}
+
+.status-major {
+    background-color: #fcb213;
+    color: white;
+    padding: 1px 1px;
+    border-radius: 5px;
+}
+
+.status-critical {
+    background-color: #ed2b11;
+    color: white;
+    padding: 1px 1px;
+    border-radius: 5px;
+}
 
 .role-viewer {
     background-color: #bfbfbd;
